@@ -43,7 +43,7 @@ class FSA {
         }
     }
 
-    //class to represenet a transition in the fsa
+    //class to represent a transition in the fsa
     private class Transition{
         private int from;
         private String symbol;
@@ -86,14 +86,14 @@ class FSA {
         states = new ArrayList<>();
         alphabet = new ArrayList<>();
         acceptingstates = new ArrayList<>();
-        //since no initial sate has been defined yet
+        //since no initial state has been defined yet
         initialstate = -1;
         nextstateid = 0;
     }
 
     public int addState(boolean startingstate, boolean acceptingstate){
         int id = nextstateid;
-        //increments the name of the state when more statess are added
+        //increments the name of the state when more states are added
         nextstateid++;
 
         State newstate = new State(id);
@@ -160,10 +160,8 @@ class FSA {
 
         ArrayList<Integer> reachablestates = new ArrayList<>();
         
-        // First, get the epsilon closure of the starting state
-        ArrayList<Integer> startStates = new ArrayList<>();
-        startStates.add(statenum);
-        startStates.addAll(closure(statenum));
+        // Get the epsilon closure of the starting state (includes the state itself)
+        ArrayList<Integer> startStates = closure(statenum);
 
         // From all states in the epsilon closure, find transitions with the given symbol
         for (int s : startStates) {
@@ -331,7 +329,5 @@ class FSA {
             }
         }
         return false;
-
-
-}
+    }
 }
